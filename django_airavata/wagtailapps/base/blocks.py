@@ -10,11 +10,51 @@ from wagtail.core.blocks import (
     StructBlock,
     TextBlock
 )
+from wagtailmarkdownblock.blocks import MarkdownBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 
+class BootstrapButton_More(StructBlock):
+    """
+    Custom 'StructBlock' that allows the user to make a bootstrap button
+    """
+    button_text = TextBlock()
+    button_link = TextBlock()
+    button_color = ChoiceBlock(choices=[
+        ('btn-primary', 'DEFAULT'),
+        ('btn-danger', 'RED'),
+        ('btn-secondary', 'GREY'),
+        ('btn-success', 'GREEN'),
+        ('btn-warning', 'ORANGE')
+    ], blank=True, required=False, help_text="select a button color")
+    button_size = ChoiceBlock(choices=[
+        ('', 'DEFAULT'),
+        ('btn-lg', 'LARGE'),
+        ('btn-sm', 'SMALL')
+    ], blank=True, required=False, help_text="select a button size")
+    custom_class = TextBlock(
+        required=False,
+        blank=True,
+        help_text="control the look of this button by giving unique class names "
+                  "separated by space and styling the class in css")
+    custom_class1 = TextBlock(
+        required=False,
+        blank=True,
+        help_text="control the look of this body by giving unique class names "
+                  "separated by space and styling the class in css")   
+    custom_class2 = TextBlock(
+        required=False,
+        blank=True,
+        help_text="control the look of this body by giving unique style names "
+                  "separated by space and styling the class in css")            
+    body = blocks.RichTextBlock(features=['h1','h2','h3','h4','h5','h6','blockquote','bold','italic','ol','ul','hr','link','document-link','image','embed'])
+    class Meta:
+        icon = "fa-bold"
+        template = "blocks/bootstrap/buttonc.html"
+        help_text = "Create a bootstrap button"
+        
 class ImageBlock(StructBlock):
     """
     Custom `StructBlock` for utilizing images with associated caption and
@@ -480,6 +520,9 @@ class BaseStreamBlock(StreamBlock):
     font_awesome_icon_block = FontAwesomeIcon()
     iu_footer_block = IuFooter()
     bootstrap_embed_video = BootstrapEmbedVideo()
+    bootstrap_button_more = BootstrapButton_More()
+    code_to_copy, CodeBlock()
+    HTML_code, RawHTMLBlock()
 
 
 class CssStreamBlock(StreamBlock):
