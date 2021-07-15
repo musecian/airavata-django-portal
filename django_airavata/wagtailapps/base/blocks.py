@@ -480,6 +480,8 @@ class BaseStreamBlock(StreamBlock):
     font_awesome_icon_block = FontAwesomeIcon()
     iu_footer_block = IuFooter()
     bootstrap_embed_video = BootstrapEmbedVideo()
+    HTML_code = RawHTMLBlock()
+    code_to_copy = CodeBlock()
 
 
 class CssStreamBlock(StreamBlock):
